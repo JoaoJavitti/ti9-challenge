@@ -1,0 +1,12 @@
+<div [formGroup]="formGroup" class="form-container">
+    <!-- Organiza o conteúdo com grid baseado no número de colunas -->
+    <div class="form-grid" [ngStyle]="{ 'grid-template-columns': getGridTemplateColumns() }">
+      <ng-content></ng-content> <!-- Recebe os inputs dinamicamente -->
+    </div>
+  
+    <!-- Botões do formulário -->
+    <div class="form-actions">
+      <pgc-button [click]="onSubmit"  class="submit-btn">Confirmar</pgc-button>
+      <pgc-button [click]="reset"     class="reset-btn">Reset</pgc-button >
+    </div>
+  </div>

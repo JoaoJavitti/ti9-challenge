@@ -14,6 +14,11 @@
     "declaration": false,
     "experimentalDecorators": true,
     "moduleResolution": "node",
+    "paths": {
+      "pgc-framework": [
+        "./dist/pgc-framework"
+      ]
+    },
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",

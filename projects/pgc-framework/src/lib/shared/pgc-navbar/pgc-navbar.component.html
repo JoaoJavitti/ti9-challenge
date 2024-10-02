@@ -1,0 +1,15 @@
+<nav class="navbar">
+    <ul class="navbar-list">
+      <li *ngFor="let item of menuItems" class="navbar-item">
+        <a [routerLink]="item.router" (click)="toggleSubMenu(item)" class="navbar-link">{{ item.name }}</a>
+        
+        <!-- Verifica se o item tem submenus -->
+        <ul *ngIf="item.elements && item.isOpen" class="submenu-list">
+          <li *ngFor="let subItem of item.elements" class="submenu-item">
+            <a [routerLink]="item.router" class="submenu-link">{{ subItem.name }}</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  

@@ -1,0 +1,79 @@
+.custom-input-container {
+    position: relative;
+    margin: 20px 0;
+    width: 100%;
+    max-width: 400px; /* Largura máxima para o input */
+  }
+  
+  .custom-input-label {
+    position: absolute;
+    top: -10px; /* Posiciona acima do input */
+    left: 12px;
+    font-size: 12px;
+    color: #666;
+    transition: 0.2s ease all;
+    background: white; /* Fundo branco para "quebrar" a borda */
+    padding: 0 4px; /* Espaçamento lateral para o fundo */
+    pointer-events: none; /* Para não bloquear o clique */
+  }
+  
+  .error {
+    border-color: red !important;
+  }
+  
+  .custom-input {
+    width: 100%;
+    padding: 16px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.2s ease-in-out;
+  }
+  
+  .custom-input:focus {
+    border-color: #007bff; /* Cor do foco */
+    outline: none;
+  }
+  
+  .custom-input:focus + .custom-input-label {
+    color: #007bff; /* Cor do label ao focar */
+  }
+  
+  .custom-input-hint {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #999;
+    transition: 0.2s ease all;
+    pointer-events: none; /* Para não bloquear a interação com o input */
+  }
+  
+  .custom-input:focus + .custom-input-label + .custom-input-hint,
+  .custom-input:not(:placeholder-shown) + .custom-input-label + .custom-input-hint {
+    opacity: 0; /* Esconde o hint quando o input é focado ou preenchido */
+  }
+  
+  .suggestion-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    position: absolute; /* Para sobrepor ao input */
+    width: 100%; /* Para ficar alinhado com o input */
+    background-color: white;
+    z-index: 1000; /* Para ficar acima de outros elementos */
+  }
+  
+  .suggestion-list li {
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+  .suggestion-list li:hover {
+    background-color: #f0f0f0; /* Cor de fundo ao passar o mouse */
+  }
+  

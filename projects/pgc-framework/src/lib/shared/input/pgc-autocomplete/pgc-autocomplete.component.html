@@ -1,0 +1,14 @@
+<div class="custom-input-container">
+  <label for="inputId" class="custom-input-label">{{ label }}</label>
+  <input id="inputId" type="text" class="custom-input" (focus)="displaySuggestions()" (blur)="checkError()"
+    [ngClass]="errorClass()" [formControl]="control" (input)="showSuggestions = true" autocomplete="off" />
+  <span *ngIf="vanishHint() && !invalid" class="custom-input-hint">{{ hint }}</span>
+  <span style="color:red;" *ngIf="invalid">{{ getErrorMessage() }}</span>
+
+  <!-- Lista de sugestões -->
+  <ul *ngIf="showSuggestions" class="suggestion-list">
+    <li *ngFor="let option of filteredOptions | async" (click)="selectOption(option)" tabindex="0">
+      {{option}}
+    </li>
+  </ul>
+</div>

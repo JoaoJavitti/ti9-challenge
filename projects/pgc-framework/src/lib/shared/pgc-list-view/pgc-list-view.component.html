@@ -1,0 +1,15 @@
+<div class="list-view-container">
+  <h2 class="list-title">
+    <ng-content></ng-content> <!-- Isso exibirá o texto entre as tags -->
+  </h2>
+  <ul class="list-view">
+    <li *ngFor="let item of items" class="list-item" (click)="selectItem(item)">
+      <div class="item-content">
+        <span class="item-title">{{ item.title }}</span>
+      </div>
+      <div *ngIf="selectedItem === item" class="item-details">
+        <p>{{ item.details }}</p>
+      </div>
+    </li>
+  </ul>
+</div>

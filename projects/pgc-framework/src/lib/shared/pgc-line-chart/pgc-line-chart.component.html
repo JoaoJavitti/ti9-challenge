@@ -1,0 +1,15 @@
+
+<div class="chart-container" [ngClass]="{ 'expanded': isExpanded }" (click)="toggleExpand()">
+  <h1>{{label}}</h1>
+  <div class="chart" #chart>
+    <ngx-charts-line-chart *ngIf="isExpanded" [view]="fullView" [results]="data" [xAxis]="true" [yAxis]="true"
+      [legend]="true" [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel" [autoScale]="true">
+    </ngx-charts-line-chart>
+    <ngx-charts-line-chart *ngIf="!isExpanded" [view]="compactView" [results]="data" [xAxis]="false" [yAxis]="false"
+      [legend]="false" [autoScale]="true">
+    </ngx-charts-line-chart>
+  </div>
+  <p *ngIf="isExpanded">Clique para reduzir</p>
+  <p *ngIf="!isExpanded">Clique para expandir</p>
+</div>

@@ -1,0 +1,60 @@
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(53, 2, 2, 0.5); /* Fundo escurecido */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Mantém o diálogo acima de outros elementos */
+  }
+  
+  .dialog-container {
+    background: white;
+    border-radius: 8px;
+    width: 400px; /* Largura do diálogo */
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .icon {
+    font-size: 24px; /* Tamanho do ícone */
+    color: #ff3c00; /* Cor do ícone */
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .dialog-body {
+    margin: 20px 0; /* Margem entre o corpo e o cabeçalho */
+  }
+  
+  .dialog-footer {
+    text-align: right; /* Alinha o botão de confirmação à direita */
+  }
+  
+  .confirm-button {
+    background-color: #ff3c00; /* Cor de fundo do botão */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+  
+  .confirm-button:hover {
+    background-color: #ff3c00; /* Cor ao passar o mouse */
+  }
+  

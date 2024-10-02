@@ -1,0 +1,20 @@
+<div class="sidebar">
+    <ul class="menu">
+      <li *ngFor="let item of items">
+        <div class="menu-item" (click)="item.elements ? toggleSubMenu(item.name) : null">
+          <mat-icon>{{ item.icon }}</mat-icon>
+          <span>{{ item.name }}</span>
+          <mat-icon *ngIf="item.elements" class="expand-icon">
+            {{ expandedMenu === item.name ? 'expand_less' : 'expand_more' }}
+          </mat-icon>
+        </div>
+  
+        <ul *ngIf="item.elements && expandedMenu === item.name" class="sub-menu">
+          <li *ngFor="let subItem of item.elements" class="sub-menu-item">
+            <a [routerLink]="subItem.route">{{ subItem.name }}</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  

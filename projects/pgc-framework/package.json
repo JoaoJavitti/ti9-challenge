@@ -1,0 +1,16 @@
+{
+  "name": "pgc-framework",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^17.3.0",
+    "@angular/core": "^17.3.0",
+    "@angular/material": "^17.3.10",
+    "@swimlane/ngx-charts": "^20.5.0",
+    "ngx-mask": "^18.0.0",
+    "@angular/cdk": "18.2.6"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

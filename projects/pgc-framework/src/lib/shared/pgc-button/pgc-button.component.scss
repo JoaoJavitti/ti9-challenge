@@ -1,0 +1,39 @@
+.custom-button {
+    background-color: #007bff; /* Cor de fundo */
+    color: white; /* Cor do texto */
+    border: none; /* Remover borda */
+    padding: 12px 24px; /* Espaçamento interno */
+    font-size: 16px; /* Tamanho da fonte */
+    border-radius: 4px; /* Arredondar as bordas */
+    cursor: pointer; /* Cursor de ponteiro */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transições suaves */
+    width: 100%; /* Largura total em telas pequenas */
+    max-width: 300px; /* Largura máxima em telas maiores */
+    text-align: center; /* Centralizar texto */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  }
+  
+  .custom-button:hover {
+    background-color: #0056b3; /* Cor ao passar o mouse */
+    transform: translateY(-2px); /* Pequeno efeito de elevação */
+  }
+  
+  .custom-button:active {
+    background-color: #004080; /* Cor ao clicar */
+    transform: translateY(1px); /* Efeito de "clicado" */
+  }
+  
+  .custom-button:disabled {
+    background-color: #ccc; /* Cor desabilitada */
+    cursor: not-allowed; /* Cursor de bloqueado */
+    box-shadow: none; /* Remover sombra quando desabilitado */
+  }
+  
+  /* Responsividade */
+  @media (max-width: 600px) {
+    .custom-button {
+      font-size: 14px; /* Tamanho da fonte menor em telas pequenas */
+      padding: 10px 20px; /* Ajuste de padding em telas pequenas */
+    }
+  }
+  

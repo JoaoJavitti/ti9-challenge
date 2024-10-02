@@ -1,0 +1,63 @@
+.chart-container {
+  position: relative; /* Mantém o contêiner relativo */
+  margin: 0 auto; /* Centraliza o contêiner em relação ao pai */
+  cursor: pointer;
+  transition: all 0.3s ease; /* Suaviza a transição */
+  border: 1px solid transparent; /* Borda transparente para manter a posição */
+  display: inline-block; /* Permite que o contêiner se ajuste ao tamanho do gráfico */
+  text-align: center; /* Centraliza o texto dentro do contêiner */
+  border: 1px solid #ccc; /* Borda ao redor do gráfico */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra ao contêiner */
+}
+
+/* Estilo para o gráfico em miniatura */
+.mini-view {
+  background-color: #f5f5f5; /* Fundo cinza */
+  border-radius: 4px;
+}
+
+/* O contêiner do gráfico se ajusta automaticamente ao tamanho da tela */
+.chart-container:not(.expanded) {
+  max-width: 320px; /* Limita o tamanho máximo para telas maiores */
+  background-color: #f5f5f5; /* Fundo cinza quando reduzido */
+}
+
+/* Quando expandido, o gráfico ocupa um tamanho um pouco maior que o gráfico */
+.chart-container.expanded {
+  padding: 15px; /* Adiciona padding ao redor do gráfico */
+  background-color: white; /* Fundo branco ao redor do gráfico */
+}
+
+/* Centraliza o gráfico dentro do contêiner */
+.chart {
+  width: 100%; /* Garante que o gráfico utilize toda a largura do contêiner */
+  height: auto; /* Permite que a altura se ajuste automaticamente */
+}
+
+/* Estilo para o texto */
+p {
+  margin-top: 10px;
+  color: #007bff;
+  font-weight: bold;
+}
+
+/* Media queries para telas menores */
+@media (max-width: 768px) {
+  .chart-container:not(.expanded) {
+    max-width: 240px;
+  }
+
+  .chart-container.expanded {
+    width: auto; /* Permite que o contêiner expanda apenas o suficiente */
+  }
+
+  .full-view {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-container:not(.expanded) {
+    max-width: 200px;
+  }
+}
