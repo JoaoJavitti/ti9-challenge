@@ -47,7 +47,7 @@ Este projeto foi desenvolvido como resposta ao desafio para a vaga de desenvolve
 
 Você pode visualizar o projeto em execução no StackBlitz:
 
-[Visualizar no StackBlitz]([[https://stackblitz.com/edit/seu-projeto](https://stackblitz.com/edit/stackblitz-starters-4mklpu?embed=1&file=projects%2Fmain%2Fsrc%2Fapp%2Fcomponents%2Ftable%2Ftable.component.html)](https://stackblitz.com/edit/stackblitz-starters-4mklpu?file=projects%2Fmain%2Fsrc%2Fapp%2Fcomponents%2Ftable%2Ftable.component.html))
+[Visualizar no StackBlitz](https://stackblitz.com/edit/seu-projeto](https://stackblitz.com/edit/stackblitz-starters-4mklpu?embed=1&file=projects%2Fmain%2Fsrc%2Fapp%2Fcomponents%2Ftable%2Ftable.component.html)](https://stackblitz.com/edit/stackblitz-starters-4mklpu?file=projects%2Fmain%2Fsrc%2Fapp%2Fcomponents%2Ftable%2Ftable.component.html)
 
 ## Como Rodar o Projeto
 Para executar a aplicação, utilize o seguinte comando:
