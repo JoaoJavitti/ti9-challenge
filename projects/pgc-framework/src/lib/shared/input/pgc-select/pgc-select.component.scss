@@ -1,0 +1,62 @@
+.custom-select-container {
+    position: relative;
+    margin: 20px 0;
+    width: 100%;
+    max-width: 400px; /* Largura máxima para o select */
+  }
+  
+  .custom-select-label {
+    position: absolute;
+    top: -10px; /* Posiciona acima do select */
+    left: 12px;
+    font-size: 12px;
+    color: #666;
+    transition: 0.2s ease all;
+    background: white; /* Fundo branco para "quebrar" a borda */
+    padding: 0 4px; /* Espaçamento lateral para o fundo */
+    pointer-events: none; /* Para não bloquear o clique */
+  }
+  
+  .custom-select {
+    width: 100%;
+    padding: 16px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.2s ease-in-out;
+    appearance: none; /* Remove estilo padrão do select */
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"><polygon fill="%23333" points="0,0 10,0 5,5"/></svg>') no-repeat right 12px center; /* Adiciona seta customizada */
+    background-color: #fff; /* Fundo branco */
+    background-size: 10px;
+  }
+  
+  .custom-select:focus {
+    border-color: #007bff; /* Cor do foco */
+    outline: none;
+  }
+  
+  .custom-select:focus + .custom-select-label {
+    color: #007bff; /* Cor do label ao focar */
+  }
+  
+  .custom-select-hint {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #999;
+    transition: 0.2s ease all;
+    pointer-events: none; /* Para não bloquear a interação com o select */
+  }
+  
+  .custom-select:focus + .custom-select-label + .custom-select-hint,
+  .custom-select:not(:placeholder-shown) + .custom-select-label + .custom-select-hint {
+    opacity: 0; /* Esconde o hint quando o select é focado ou preenchido */
+  }
+
+  option{
+    text-align: left;
+  }
+  

@@ -1,8 +1,8 @@
+
+
 /*
  * Public API Surface of pgc-framework
  */
-
-export * from './lib/shared/pgc-sidebar/pgc-sidebar.component';
 export * from './lib/pgc-framework.service';
 export * from './lib/pgc-framework.component';
 export * from './lib/pgc-framework.module';
@@ -23,3 +23,7 @@ export * from './lib/shared/pgc-line-chart/pgc-line-chart.component';
 export * from './lib/shared/pgc-list-view/pgc-list-view.component';
 export * from './lib/shared/pgc-navbar/pgc-navbar.component';
 export * from './lib/shared/shared.module';
+export * from './lib/shared/input/pgc-check/pgc-check.component';
+export * from './lib/shared/input/pgc-select/pgc-select.component';
+export * from './lib/shared/input/pgc-slide/pgc-slide.component';
+export * from './lib/shared/pgc-sidebar/pgc-sidebar.component';

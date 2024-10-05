@@ -1,0 +1,64 @@
+@if(elementForm != undefined){
+<pgc-form [onSubmit]="onSubmit" [onReset]="onReset" [formGroup]="elementForm" [columns]="3">
+    @for (field of formConfig?.form?.fields; track field.id){
+    @switch(field.component){
+    @case('pgc-input'){
+    @if(showField(field)){
+    <pgc-input class="input" [label]="field.label" [hint]="field.hint" [control]="getControl(field.name)"></pgc-input>
+    }
+    }
+    @case('pgc-select'){
+    @if(showField(field)){
+    <pgc-select class="input" [label]="field.label" [hint]="field.hint" [control]="getControl(field.name)"
+        [options]="field.options"></pgc-select>
+    }
+    }
+    @case('pgc-slide'){
+    @if(showField(field)){
+    <pgc-slide class="input" [label]="field.label" [hint]="field.hint" [control]="getControl(field.name)"></pgc-slide>
+    }
+    }
+    @case('pgc-checkbox'){
+    @if(showField(field)){
+    <pgc-check class="input" [label]="field.label" [hint]="field.hint" [control]="getControl(field.name)"></pgc-check>
+    }
+    }
+    @case('pgc-textarea'){
+    @if(showField(field)){
+    <pgc-textarea class="input" [label]="field.label" [hint]="field.hint"
+        [control]="getControl(field.name)"></pgc-textarea>
+    }
+    }
+    @case('pgc-phone-input'){
+    @if(showField(field)){
+    <pgc-phone-input class="input" [label]="field.label" [hint]="field.hint"
+        [control]="getControl(field.name)"></pgc-phone-input>
+    }
+    }
+    @case('pgc-cpfcnpj-input'){
+    @if(showField(field)){
+    <pgc-cpfcnpj-input class="input" [label]="field.label" [hint]="field.hint"
+        [control]="getControl(field.name)"></pgc-cpfcnpj-input>
+    }
+    }
+    }
+    } @empty {
+    Nada encontrado
+    }
+</pgc-form>
+}
+
+@if(formError){
+<pgc-alert [closeDialog]="onAlertClose">
+    <p style="white-space: pre;">
+        Resolva todos os erros do formulário antes de enviar:
+        {{message()}}
+    </p>
+</pgc-alert>
+}
+
+@if(formSuccess){
+<pgc-dialog [closeDialog]="onDialogClose">
+    Registro Incluído/Editado com sucesso
+</pgc-dialog>
+}

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule, Validator, ValidatorFn } from '@angular/forms';
+import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
+import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule, Validator, ValidatorFn } from '@angular/forms';
 import { errorMessages, getErrorMessage } from '../../info/error-messages';
 
 @Component({
@@ -8,14 +8,23 @@ import { errorMessages, getErrorMessage } from '../../info/error-messages';
   standalone: true,
   imports: [CommonModule,FormsModule,ReactiveFormsModule],
   templateUrl: './pgc-input.component.html',
-  styleUrl: './pgc-input.component.scss'
+  styleUrl: './pgc-input.component.scss',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => PgcInputComponent),
+      multi: true
+    }
+  ]
 })
-export class PgcInputComponent {
+export class PgcInputComponent implements ControlValueAccessor {
   @Output() valueEmitter;
   @Input() value: string;
   @Input() label:string;
   @Input() hint:string;
   @Input() control;
+  @Input() onChange!:(args:any)=>{};
+  @Input() onTouched!:(args:any)=>{};
   class:string;
   invalid;
 
@@ -52,6 +61,20 @@ export class PgcInputComponent {
 
   setHint(hint:string){
     this.hint = hint;
+  }
+
+  writeValue(value: any): void {
+    if (value !== undefined) {
+      this.value = value;
+    }
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
   }
 
 }

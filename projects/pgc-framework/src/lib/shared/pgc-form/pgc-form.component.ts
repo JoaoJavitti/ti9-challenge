@@ -13,7 +13,8 @@ import { PgcButtonComponent } from '../pgc-button/pgc-button.component';
 export class PgcFormComponent {
   @Input() formGroup!: FormGroup;  
   @Input() columns: number = 1;
-  @Input() onSubmit!: (args: any) => void; 
+  @Input() onSubmit!: (args: any) => void;
+  @Input() onReset!:(args: any) => void; 
 
 
   getGridTemplateColumns(): string {
@@ -21,7 +22,7 @@ export class PgcFormComponent {
   }
 
   reset = () => {
-    console.log(this.formGroup)
+    this.onReset(null);
     this.formGroup.reset();
   };
 }

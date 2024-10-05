@@ -1,0 +1,45 @@
+.custom-slide-toggle-container {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .custom-slide-toggle {
+    appearance: none;
+    width: 40px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .custom-slide-toggle:checked {
+    background-color: #007bff;
+  }
+  
+  .custom-slide-toggle:before {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background-color: white;
+    border-radius: 50%;
+    top: 1px;
+    left: 1px;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .custom-slide-toggle:checked:before {
+    transform: translateX(20px);
+  }
+  
+  .custom-slide-toggle-label {
+    margin-left: 10px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+  }
+  

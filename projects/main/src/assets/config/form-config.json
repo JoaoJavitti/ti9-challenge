@@ -1,0 +1,248 @@
+{
+  "form": {
+    "title": "Cadastro de Fornecedores",
+    "fields": [
+      {
+        "id": 0,
+        "label": "Código",
+        "type": "input",
+        "hint": "Digite o código",
+        "component": "pgc-input",
+        "name": "codigo",
+        "validation": {
+          "required": true,
+          "maxLength": 6
+        }
+      },
+      {
+        "id": 13,
+        "label": "CNPJ/CPF",
+        "type": "input",
+        "hint": "Digite o CNPJ/CPF",
+        "component": "pgc-cpfcnpj-input",
+        "name": "cnpjCpf",
+        "validation": {
+          "required": true,
+          "cnpjcpf": true
+        }
+      },
+      {
+        "id": 1,
+        "label": "Nome",
+        "type": "input",
+        "hint": "Digite o nome",
+        "component": "pgc-input",
+        "name": "nome",
+        "validation": {
+          "required": true
+        }
+      },
+      {
+        "id": 2,
+        "label": "Natureza",
+        "type": "select",
+        "hint": "Selecione a Natureza",
+        "component": "pgc-select",
+        "name": "natureza",
+        "options": [
+          {
+            "label": "Pessoa Física",
+            "value": "Pessoa Física"
+          },
+          {
+            "label": "Pessoa Jurídica",
+            "value": "Pessoa Jurídica"
+          }
+        ],
+        "validation": {
+          "required": true
+        }
+      },
+      {
+        "id": 3,
+        "label": "Endereço",
+        "type": "input",
+        "hint": "Digite o endereço",
+        "component": "pgc-input",
+        "name": "endereco",
+        "validation": {
+          "required": true
+        }
+      },
+      {
+        "id": 4,
+        "label": "Estado (UF)",
+        "type": "select",
+        "hint": "Selecione o Estado",
+        "component": "pgc-select",
+        "name": "estado",
+        "options": [
+          {
+            "label": "SP",
+            "value": "SP"
+          },
+          {
+            "label": "RJ",
+            "value": "RJ"
+          },
+          {
+            "label": "MG",
+            "value": "MG"
+          },
+          {
+            "label": "ES",
+            "value": "ES"
+          }
+        ],
+        "validation": {
+          "required": true
+        }
+      },
+      {
+        "id": 5,
+        "label": "Ativo",
+        "type": "boolean",
+        "component": "pgc-slide",
+        "name": "ativo",
+        "description": "Se o fornecedor está ativo no sistema"
+      },
+      {
+        "id": 6,
+        "label": "Aceita Pix",
+        "type": "boolean",
+        "component": "pgc-checkbox",
+        "name": "aceitaPix",
+        "description": "Se o fornecedor aceita pagamentos via Pix"
+      },
+      {
+        "id": 7,
+        "label": "Tipo de Chave Pix",
+        "type": "select",
+        "hint": "Selecione o tipo de Chave",
+        "component": "pgc-select",
+        "name": "tipoChavePix",
+        "options": [
+          {
+            "label": "CNPJ/CPF",
+            "value": "CNPJ/CPF"
+          },
+          {
+            "label": "E-mail",
+            "value": "E-mail"
+          },
+          {
+            "label": "Celular",
+            "value": "Celular"
+          },
+          {
+            "label": "Chave Aleatória",
+            "value": "Chave Aleatória"
+          }
+        ],
+        "validation": {
+          "dependent": {"control": "aceitaPix", "value":true}
+        },
+        "condition": [
+          {
+            "field": "aceitaPix",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "label": "Chave Pix",
+        "type": "input",
+        "hint": "Digite o E-mail",
+        "component": "pgc-input",
+        "name": "chavePix",
+        "validation": {
+          "dependent": {"control": "aceitaPix", "value":true}
+        },
+        "condition": [
+          {
+            "field": "aceitaPix",
+            "value": true
+          },
+          {
+            "field": "tipoChavePix",
+            "value": "E-mail"
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "label": "Chave Pix",
+        "type": "input",
+        "hint": "Digite o CNPJ",
+        "component": "pgc-cpfcnpj-input",
+        "name": "chavePix",
+        "validation": {
+          "dependent": {"control": "aceitaPix", "value":true},
+          "cnpjcpf": true
+        },
+        "condition": [
+          {
+            "field": "aceitaPix",
+            "value": true
+          },
+          {
+            "field": "tipoChavePix",
+            "value": "CNPJ/CPF"
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "label": "Chave Pix",
+        "type": "input",
+        "hint": "Digite o celular",
+        "component": "pgc-phone-input",
+        "name": "chavePix",
+        "validation": {
+          "dependent": {"control": "aceitaPix", "value":true}
+        },
+        "condition": [
+          {
+            "field": "aceitaPix",
+            "value": true
+          },
+          {
+            "field": "tipoChavePix",
+            "value": "Celular"
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "label": "Chave Pix",
+        "type": "input",
+        "hint": "Digite a chave PIX",
+        "component": "pgc-textarea",
+        "name": "chavePix",
+        "validation": {
+          "dependent": {"control": "aceitaPix", "value":true}
+        },
+        "condition": [
+          {
+            "field": "aceitaPix",
+            "value": true
+          },
+          {
+            "field": "tipoChavePix",
+            "value": "Chave Aleatória"
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "label": "Observações",
+        "type": "textarea",
+        "hint": "Digite a Observação",
+        "component": "pgc-textarea",
+        "name": "observacao",
+        "optional": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+    "table": {
+        "columns": [
+            "Codigo",
+            "Nome",
+            "Cnpj/Cpf"
+        ]
+    }
+}

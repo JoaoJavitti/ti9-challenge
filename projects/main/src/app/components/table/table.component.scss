@@ -1,0 +1,97 @@
+// Contêiner para a tabela
+.table-container {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+
+  // Estilo para a tabela
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    // Estilos para o cabeçalho da tabela
+    thead {
+      background-color: #f5f5f5;
+
+      th {
+        padding: 12px 15px;
+        text-align: left;
+        font-weight: bold;
+        font-size: 16px;
+        color: #333;
+        border-bottom: 2px solid #e0e0e0;
+        // Remover estilos padrão da biblioteca
+        background: none !important;
+        border: none !important;
+      }
+    }
+
+    // Estilos para o corpo da tabela
+    tbody {
+      tr {
+        border-bottom: 1px solid #e0e0e0;
+
+        // Estilo ao passar o mouse sobre a linha
+        &:hover {
+          background-color: #f9f9f9; // Muda a cor de fundo na linha
+        }
+
+        // Células da tabela
+        td {
+          padding: 12px 15px;
+          font-size: 14px;
+          color: #666;
+          // Remover estilos padrão da biblioteca
+          background: none !important;
+          border: none !important;
+        }
+      }
+    }
+  }
+}
+
+
+.button-container {
+    display: flex;
+    gap: 10px; /* Espaçamento entre os botões */
+  }
+  
+  .icon-button {
+    background-color: transparent; /* Fundo transparente */
+    border: none; /* Remover borda */
+    cursor: pointer; /* Mostrar cursor de ponteiro */
+    padding: 10px; /* Espaçamento interno */
+    border-radius: 50%; /* Deixar o botão redondo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease; /* Animação suave ao passar o mouse */
+  }
+  
+  .icon-button i {
+    font-size: 18px;
+    color: #333; /* Cor padrão do ícone */
+  }
+  
+  /* Estilo para o botão de edição (lápis) */
+  .icon-button.edit:hover {
+    background-color: #e0f7fa; /* Fundo azul claro ao passar o mouse */
+  }
+  
+  .icon-button.edit i {
+    color: #007bff; /* Cor azul para o ícone */
+  }
+  
+  /* Estilo para o botão de exclusão (lata de lixo) */
+  .icon-button.delete:hover {
+    background-color: #ffe6e6; /* Fundo vermelho claro ao passar o mouse */
+  }
+  
+  .icon-button.delete i {
+    color: #ff4d4f; /* Cor vermelha para o ícone */
+  }
+  
+

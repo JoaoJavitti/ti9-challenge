@@ -1,0 +1,8 @@
+<div class="custom-select-container">
+    <label for="selectId" class="custom-select-label">{{label}}</label>
+    <select id="selectId" class="custom-select" [formControl]="control" (blur)="checkError()">
+        <option *ngFor="let option of options" [value]="option.value">{{option.label}}</option>
+    </select>
+    <span *ngIf="vanishHint() && !invalid" class="custom-select-hint">{{hint}}</span>
+    <span style="color:red;" *ngIf="invalid">{{getErrorMessage()}}</span>
+</div>

@@ -17,6 +17,9 @@ import { PgcLineChartComponent } from './pgc-line-chart/pgc-line-chart.component
 import { PgcButtonComponent } from './pgc-button/pgc-button.component';
 import { PgcFormComponent } from './pgc-form/pgc-form.component';
 import { PgcSidebarComponent } from './pgc-sidebar/pgc-sidebar.component';
+import { PgcCheckComponent } from './input/pgc-check/pgc-check.component';
+import { PgcSlideComponent } from './input/pgc-slide/pgc-slide.component';
+import { PgcSelectComponent } from './input/pgc-select/pgc-select.component';
 
 
 
@@ -27,12 +30,12 @@ import { PgcSidebarComponent } from './pgc-sidebar/pgc-sidebar.component';
     
     PgcInputComponent, PgcPasswordComponent, PgcPhoneInputComponent, PgcNumberInputComponent, PgcCpfCnpjInputComponent, PgcTextAreaInputComponent,
     PgcButtonComponent, PgcLineChartComponent, PgcDialogComponent, PgcAlertComponent, PgcConfirmComponent, PgcNavbarComponent, PgcListViewComponent, PgcAutocompleteComponent, PgcContentComponent,
-    PgcFormComponent, PgcSidebarComponent
+    PgcFormComponent, PgcSidebarComponent, PgcCheckComponent, PgcSlideComponent, PgcSelectComponent
   ],
   exports: [
     PgcInputComponent, PgcPasswordComponent, PgcPhoneInputComponent, PgcNumberInputComponent, PgcCpfCnpjInputComponent, PgcTextAreaInputComponent,
     PgcButtonComponent, PgcLineChartComponent, PgcDialogComponent, PgcAlertComponent, PgcConfirmComponent, PgcNavbarComponent, PgcListViewComponent, PgcAutocompleteComponent, PgcContentComponent,
-    PgcFormComponent, PgcSidebarComponent
+    PgcFormComponent, PgcSidebarComponent, PgcCheckComponent, PgcSlideComponent, PgcSelectComponent
   ]
 })
 export class SharedModule { }

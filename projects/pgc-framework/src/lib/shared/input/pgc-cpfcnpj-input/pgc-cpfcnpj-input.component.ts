@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validator, ValidatorFn, Validators } from '@angular/forms';
 import { errorMessages } from '../../info/error-messages';
 import { PgcInputComponent } from '../pgc-input/pgc-input.component';
@@ -8,7 +8,7 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 @Component({
   selector: 'pgc-cpfcnpj-input',
   standalone: true,
-  imports: [CommonModule,FormsModule,ReactiveFormsModule, NgxMaskDirective, NgxMaskPipe],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgxMaskDirective, NgxMaskPipe],
   providers: [provideNgxMask(),],
   templateUrl: './pgc-cpfcnpj-input.component.html',
   styleUrl: './pgc-cpfcnpj-input.component.scss'
@@ -16,28 +16,47 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 export class PgcCpfCnpjInputComponent extends PgcInputComponent {
 
   readonly cpf: string = '000.000.000-000';
+  readonly cpfTrue: string = '000.000.000-00';
   readonly cnpj: string = '00.000.000/0000-00';
   cpfCnpjMask: string;
 
-  constructor(){
+  constructor() {
     super();
     this.cpfCnpjMask = this.cpf;
-    super.addValidators(Validators.minLength(11));
-    super.addValidators(Validators.maxLength(14));
-    super.addValidators(cpfCnpjValidator);
     super.setHint('Digite o CPF/CNPJ...');
+    super.addValidators(Validators.minLength(14));
+    super.addValidators(Validators.maxLength(18));
+    super.addValidators(cpfCnpjValidator);
   }
 
-  changeMask() {
-    let value = this.control.value!=null?this.control.value:"";
-    if (value.length > 11) {
-      this.cpfCnpjMask = this.cnpj; // Máscara de CNPJ
-    } else {
-      this.cpfCnpjMask = this.cpf; // Máscara de CPF
+  override checkError(): void {
+    super.checkError();
+  }
+
+
+  onInputChange(): void {
+    if (this.control.value != null) {
+      let value = this.control.value.replace(/\D/g, '');
+
+      if (value.length <= 11) {
+        // Formatar como CPF: 000.000.000-00
+        value = value.replace(/(\d{3})(\d)/, '$1.$2');
+        value = value.replace(/(\d{3})(\d)/, '$1.$2');
+        value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+      } else {
+        // Formatar como CNPJ: 00.000.000/0000-00
+        value = value.replace(/^(\d{2})(\d)/, '$1.$2');
+        value = value.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
+        value = value.replace(/\.(\d{3})(\d)/, '.$1/$2');
+        value = value.replace(/(\d{4})(\d{1,2})$/, '$1-$2');
+      }
+
+      this.control.setValue(value, { emitEvent: false }); // Atualiza o valor formatado sem disparar um evento
     }
   }
-
 }
+
+
 
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
@@ -50,10 +69,12 @@ export function cpfCnpjValidator(control: AbstractControl): ValidationErrors | n
   }
 
   // Aceitar somente se o valor tiver exatamente 11 ou 14 caracteres
-  if (value.length === 11 || value.length === 14) {
+  if (value.length === 14 || value.length === 18) {
     return null; // Válido
   }
 
   // Se o tamanho não for 11 ou 14, retornar um erro
   return { cpfCnpjInvalidLength: true };
 }
+
+
