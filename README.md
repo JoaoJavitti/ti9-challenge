@@ -43,10 +43,6 @@ Este projeto foi desenvolvido como resposta ao desafio para a vaga de desenvolve
 ### Persistência dos Dados
 - Os dados são armazenados em memória durante a execução da aplicação sendo possível utilizar `localStorage` para preservá-los após o fechamento do navegador.
 
-## Demo Online
-
-Você pode visualizar o projeto em execução no StackBlitz:
-
 ## Como Rodar o Projeto
 Para executar a aplicação, utilize o seguinte comando:
 ```bash
