@@ -6,6 +6,7 @@ import { combineLatest } from 'rxjs';
     providedIn: 'root'
 }) export class ShareDataService {
     readonly formDataClear = {
+        id: 0,
         codigo: "",
         nome: "",
         cnpjCpf: "",
@@ -32,7 +33,7 @@ import { combineLatest } from 'rxjs';
         return this.formData();
     }
 
-    clearFormData(){
+    clearFormData() {
         this.formData.update(() => this.formDataClear);
     }
 
@@ -40,9 +41,13 @@ import { combineLatest } from 'rxjs';
         return this.suppliersData();
     }
 
+    setSuppliers(data: Supplier[]) {
+        this.suppliersData.update(() => data);
+    }
+
     createUpdate(data: Supplier) {
         const supplierArray = this.suppliersData();
-        const duplicate = supplierArray.findIndex(sup => sup.codigo == data.codigo);
+        const duplicate = supplierArray.findIndex(sup => sup.id == data.id);
         if (duplicate != -1)
             this.editSupplier(duplicate, data);
         else
@@ -51,6 +56,9 @@ import { combineLatest } from 'rxjs';
     }
 
     pushSupplier(data: Supplier) {
+        if (this.getSuppliers().length > 0)
+            data.id = this.suppliersData().reduce((a, b) => b.id > a.id ? b : a).id + 1;
+        else data.id = 1;
         let supplierArray = [...this.suppliersData(), data];
         this.suppliersData.update(() => supplierArray);
     }

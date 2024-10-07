@@ -91,3 +91,9 @@ button {
   content: '👁️‍🗨️'; /* Ícone de olho fechado */
 }
 
+
+.custom-input-container {
+  @media (max-width: 600px) {
+    width: 100%  !important;
+  }
+}

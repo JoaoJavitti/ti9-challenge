@@ -2,6 +2,7 @@ import { Interface } from "readline";
 
 export interface Supplier{
     [key:string]:any;
+    id: number;
     codigo: string;
     nome: string;
     cnpjCpf:string;

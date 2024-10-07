@@ -3,7 +3,8 @@
         "columns": [
             "Codigo",
             "Nome",
-            "Cnpj/Cpf"
+            "Cnpj/Cpf",
+            "Actions"
         ]
     }
 }

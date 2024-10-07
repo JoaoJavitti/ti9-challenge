@@ -1,16 +1,35 @@
 @if(tableColumns?.table?.columns.length>0){
-<div class="data-table-container">
-    <table id="datatable"  datatable [dtOptions]="dtoptions" [dtTrigger]="dttrigger">
-        <thead>
-            <tr>
-                @for(column of tableColumns?.table?.columns; track column){
-                <th>{{column}}</th>
-                }
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+<div class="data-table-container mat-elevation-z8">
+    <div class="filtro">
+        <pgc-input label="Filtro" hint="Filtrar fornecedores..." [control]="filtro"></pgc-input>
+    </div>
+    <mat-table [dataSource]="dataSource" class="custom-table">
+        @for(column of tableColumns.table.columns; track column){
+        <ng-container [matColumnDef]="column">
+            <mat-header-cell *matHeaderCellDef>{{column}}</mat-header-cell>
+            @if(column != "Actions"){
+            <mat-cell *matCellDef="let row; let i = index">
+                <span class="mobile-label">{{column}}:</span>
+                {{getColumn(row, column)}}
+            </mat-cell>
+            } @else {
+            <mat-cell *matCellDef="let row">
+                <div class="button-container">
+                    <button mat-raised-button class="custom-button" (click)="onEdit(row)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-raised-button class="custom-button" (click)="onDelete(row)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </mat-cell>
+            }
+        </ng-container>
+        }
+        <mat-header-row *matHeaderRowDef="tableColumns.table.columns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: tableColumns.table.columns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Selecione a página">
+    </mat-paginator>
 </div>
 }

@@ -1,34 +1,35 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { AfterViewInit, Component, effect, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ShareDataService } from '../../scripts/share-formdata.service';
 import { Supplier } from '../../interfaces/supplier.model';
-import { DataTablesModule } from 'angular-datatables';
-import DataTables, { Config } from 'datatables.net';
-import { Subject } from 'rxjs';
-import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import DataTable from 'datatables.net-dt';
-// import * as $ from 'jquery';
-
-declare var $: any;
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButton, MatButtonModule } from '@angular/material/button';
+import { PgcAutocompleteComponent } from "../../../../../pgc-framework/src/lib/shared/input/pgc-autocomplete/pgc-autocomplete.component";
+import { PgcFrameworkModule } from 'pgc-framework';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-main-table',
   standalone: true,
-  imports: [HttpClientModule, DataTablesModule, CommonModule],
+  imports: [HttpClientModule, CommonModule, MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, PgcFrameworkModule],
   templateUrl: './table.component.html',
-  styleUrl: './table.component.scss'
+  styleUrl: './table.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
-export class TableComponent implements OnInit, AfterViewInit {
+export class TableComponent implements OnInit {
 
   tableColumns!: any;
   shareFormDataService = inject(ShareDataService);
   formData !: Supplier;
   suppliers: Supplier[] = [];
 
-  dtoptions: Config = {};
-  dttrigger: Subject<any> = new Subject<void>();
-  dataTable!: any;
+  filtro: FormControl = new FormControl("");
+
+  dataSource: MatTableDataSource<Supplier> = new MatTableDataSource<Supplier>();
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private http: HttpClient) {
     effect(() => {
@@ -37,78 +38,22 @@ export class TableComponent implements OnInit, AfterViewInit {
     });
     effect(() => {
       this.suppliers = this.shareFormDataService.getSuppliers();
-      this.updateDataTable();
-    })
+      this.dataSource = new MatTableDataSource<Supplier>(this.suppliers);
+      this.dataSource.paginator = this.paginator;
+    });
 
-    this.dtoptions = {
-      pagingType: 'full',
-      destroy: true,
-    }
+    this.filtro.valueChanges.subscribe((value:string) => {
+      this.dataSource.filter = value;
+    })
   }
 
   ngOnInit(): void {
     this.http.get('/assets/config/table-config.json').subscribe(config => {
       this.tableColumns = config;
-      this.dttrigger.next(null);
-      setTimeout(() => {
-        this.initializeDataTable();
-      });
     });
   }
 
-  ngAfterViewInit(): void {
-    $('tbody').on('click', '.btn-action', (event: any) => {
-      const buttonType = $(event.currentTarget).data('action'); // "edit" ou "delete"
-      const rowId = $(event.currentTarget).data('id');
-
-      if (buttonType === 'edit') {
-        this.onEdit(rowId);
-      } else if (buttonType === 'delete') {
-        this.onDelete(rowId);
-      }
-    });
-  }
-
-  initializeDataTable() {
-    this.dataTable = $('#datatable').DataTable();
-  }
-
-  updateDataTable() {
-    if (this.dataTable) {
-      // Clear existing data (optional, consider using `rows.add()` directly)
-      this.dataTable.clear();
-
-      // Add new rows with buttons (using addRows function)
-      this.addRows(this.suppliers);
-
-      this.dataTable.draw();  // Redraw the table
-    }
-  }
-
-  addRows(data: Supplier[]) {
-    const rows = [];
-    for (let i = 0; i < data.length; i++) {
-      const row = [];
-      for (const column of this.tableColumns?.table?.columns || []) {
-        row.push(this.getColumn(data[i], column));
-      }
-
-      // Add buttons to the last column (Actions)
-      row.push(`<div class="button-container">
-                <button data-action="edit" data-id="${i}" class="icon-button edit btn-action">
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                <button data-action="delete" data-id="${i}" class="icon-button delete btn-action">
-                  <i class="fas fa-trash-alt"></i>
-                </button>
-              </div>`);
-      rows.push(row);
-    }
-    this.dataTable.rows.add(rows).draw(); // Add rows and redraw
-  }
-
-  onEdit(editId: number) {
-    const edit = this.suppliers[editId];
+  onEdit(edit:Supplier) {
     this.formData = edit;
     this.shareFormDataService.setFormData(edit);
   }
@@ -120,5 +65,14 @@ export class TableComponent implements OnInit, AfterViewInit {
   getColumn(supplier: Supplier, column: string) {
     const col = column.charAt(0).toLowerCase() + column.slice(1).replace(" ", "").replace("/", "");
     return supplier[col];
+  }
+
+  autocompleteOptions(): {label:string, value:string}[]{
+    return this.suppliers.map(s => {
+      return {
+        label:s.nome,
+        value: s.nome + s.cnpjCpf + s.codigo
+      }
+    })
   }
 }

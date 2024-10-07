@@ -1,3 +1,14 @@
 .input{
     margin-right: 20%;
 }
+
+@media (max-width: 600px) {
+    .input{
+        margin: 0;
+        max-width: 100% !important;
+    }
+
+    .form{
+        max-width: 100% !important;
+    }
+  }

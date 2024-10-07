@@ -1,12 +1,47 @@
-<div class="container">
-  <div class="form-section">
-    <h1>Cadastro</h1>
-    <app-main-form></app-main-form>
+<mat-card class="crud-card">
+  <mat-card-header>
+    <mat-card-title>
+      CRUD FORNECEDORES
+    </mat-card-title>
 
-  </div>
+    <mat-card-actions class="action-buttons">
+      <button title="Salvar dados cadastrados localmente" mat-raised-button class="custom-button" (click)="onSave()">
+        <mat-icon>save</mat-icon> Salvar
+      </button>
+      <button title="Carregar dados previamente salvos" mat-raised-button class="custom-button" (click)="onLoad()">
+        <mat-icon>cloud_download</mat-icon> Carregar
+      </button>
+      <button title="Limpar dados salvos" mat-raised-button class="custom-button" (click)="onClear()">
+        <mat-icon>clear</mat-icon> Limpar
+      </button>
+    </mat-card-actions>
+  </mat-card-header>
 
-  <div class="table-section">
-    <h2>Fornecedores cadastrados</h2>
-    <app-main-table></app-main-table>
-  </div>
-</div>
+  <mat-card-content>
+    <div class="container">
+      <!-- Form Section -->
+      <div class="form-section">
+        <h2>Cadastro</h2>
+        <app-main-form></app-main-form>
+      </div>
+
+      <!-- Table Section -->
+      <div class="table-section">
+        <h2>Fornecedores cadastrados</h2>
+        <app-main-table></app-main-table>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+@if(alert){
+<pgc-alert [closeDialog]="onAlertClose">{{message}}</pgc-alert>
+}
+
+@if(confirm){
+  <pgc-confirm [closeDialog]="onConfirmClose">{{message}}</pgc-confirm>
+}
+
+@if(dialog){
+  <pgc-dialog [closeDialog]="onDialogClose">{{message}}</pgc-dialog>
+}

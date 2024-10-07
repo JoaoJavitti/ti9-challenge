@@ -2,23 +2,28 @@
   position: relative;
   margin: 20px 0;
   width: 100%;
-  max-width: 400px; /* Largura máxima para o input */
+  max-width: 400px;
+  /* Largura máxima para o input */
 }
 
 .custom-input-label {
   position: absolute;
-  top: -10px; /* Posiciona acima do input */
+  top: -10px;
+  /* Posiciona acima do input */
   left: 12px;
   font-size: 12px;
   color: #666;
   transition: 0.2s ease all;
-  background: white; /* Fundo branco para "quebrar" a borda */
-  padding: 0 4px; /* Espaçamento lateral para o fundo */
-  pointer-events: none; /* Para não bloquear o clique */
+  background: white;
+  /* Fundo branco para "quebrar" a borda */
+  padding: 0 4px;
+  /* Espaçamento lateral para o fundo */
+  pointer-events: none;
+  /* Para não bloquear o clique */
 }
 
-.error{
-  border-color:red !important;
+.error {
+  border-color: red !important;
 }
 
 .custom-input {
@@ -32,12 +37,14 @@
 }
 
 .custom-input:focus {
-  border-color: #007bff; /* Cor do foco */
+  border-color: #007bff;
+  /* Cor do foco */
   outline: none;
 }
 
-.custom-input:focus + .custom-input-label {
-  color: #007bff; /* Cor do label ao focar */
+.custom-input:focus+.custom-input-label {
+  color: #007bff;
+  /* Cor do label ao focar */
 }
 
 .custom-input-hint {
@@ -48,12 +55,14 @@
   font-size: 12px;
   color: #999;
   transition: 0.2s ease all;
-  pointer-events: none; /* Para não bloquear a interação com o input */
+  pointer-events: none;
+  /* Para não bloquear a interação com o input */
 }
 
-.custom-input:focus + .custom-input-label + .custom-input-hint,
-.custom-input:not(:placeholder-shown) + .custom-input-label + .custom-input-hint {
-  opacity: 0; /* Esconde o hint quando o input é focado ou preenchido */
+.custom-input:focus+.custom-input-label+.custom-input-hint,
+.custom-input:not(:placeholder-shown)+.custom-input-label+.custom-input-hint {
+  opacity: 0;
+  /* Esconde o hint quando o input é focado ou preenchido */
 }
 
 .input-container {
@@ -76,7 +85,8 @@ input {
 button {
   background: none;
   border: none;
-  cursor: pointer;/* Ajuste conforme necessário */
+  cursor: pointer;
+  /* Ajuste conforme necessário */
 }
 
 .icon {
@@ -84,10 +94,17 @@ button {
 }
 
 .eye-open::before {
-  content: '👁️'; /* Ícone de olho aberto */
+  content: '👁️';
+  /* Ícone de olho aberto */
 }
 
 .eye-closed::before {
-  content: '👁️‍🗨️'; /* Ícone de olho fechado */
+  content: '👁️‍🗨️';
+  /* Ícone de olho fechado */
 }
 
+.custom-input-container {
+  @media (max-width: 600px) {
+    max-width: 100%  !important;
+  }
+}

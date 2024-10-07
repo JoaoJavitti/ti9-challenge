@@ -30,7 +30,9 @@ export class FormComponent<T> implements OnInit {
     effect(() => {
       this.formData = this.shareFormDataService.getFormData();
       this.suppliers = this.shareFormDataService.getSuppliers();
-      this.elementForm.setValue(this.shareFormDataService.getFormData(), {emitEvent:false});
+      if (Object.keys(this.elementForm.controls).length > 0) {
+        this.elementForm.setValue(this.shareFormDataService.getFormData(), { emitEvent: false });
+      }
     })
   }
 
@@ -63,10 +65,10 @@ export class FormComponent<T> implements OnInit {
     if (field.validation?.maxLength) {
       validators.push(Validators.maxLength(field.validation.maxLength));
     }
-    if (field.validation?.cnpjcpf){
+    if (field.validation?.cnpjcpf) {
       validators.push(CpfCnpjValidator.cpfCnpjValidator)
     }
-    if (field.validation?.dependent){
+    if (field.validation?.dependent) {
       validators.push(DependentValidator.dependentValidator(field.validation?.dependent.control, field.validation?.dependent.value))
     }
     return validators;
@@ -105,14 +107,14 @@ export class FormComponent<T> implements OnInit {
     this.formError = false;
   }
 
-  message():string {
+  message(): string {
     return getErrorMessagesForFormGroup(this.elementForm);
   }
 
   onReset = (): void => {
     this.shareFormDataService.clearFormData();
   }
-  
+
   onDialogClose = (): void => {
     this.formSuccess = false;
   }

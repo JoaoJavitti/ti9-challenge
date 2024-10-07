@@ -58,4 +58,24 @@
   .confirm-button:hover {
     background-color: #06a034; /* Cor ao passar o mouse */
   }
+
+  /* Responsividade */
+@media (max-width: 768px) {
+  .dialog-container {
+    width: 90%; /* Largura do diálogo em telas menores */
+    padding: 15px; /* Reduzir o padding em telas menores */
+  }
+
+  .icon {
+    font-size: 20px; /* Reduzir o tamanho do ícone em telas menores */
+  }
+
+  .close-button {
+    font-size: 18px; /* Reduzir o tamanho do botão de fechar */
+  }
+
+  .confirm-button {
+    padding: 8px 12px; /* Reduzir padding do botão de confirmação */
+  }
+}
   

@@ -1,5 +1,5 @@
 @if(elementForm != undefined){
-<pgc-form [onSubmit]="onSubmit" [onReset]="onReset" [formGroup]="elementForm" [columns]="3">
+<pgc-form class="form" [onSubmit]="onSubmit" [onReset]="onReset" [formGroup]="elementForm" [columns]="3">
     @for (field of formConfig?.form?.fields; track field.id){
     @switch(field.component){
     @case('pgc-input'){
@@ -40,6 +40,9 @@
     <pgc-cpfcnpj-input class="input" [label]="field.label" [hint]="field.hint"
         [control]="getControl(field.name)"></pgc-cpfcnpj-input>
     }
+    }
+    @case('invisible'){
+        <pgc-input style="display: none;" [control]="getControl(field.name)"></pgc-input>
     }
     }
     } @empty {

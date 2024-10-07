@@ -3,6 +3,13 @@
     "title": "Cadastro de Fornecedores",
     "fields": [
       {
+        "id":-1,
+        "label":"",
+        "type":"input",
+        "component":"invisible",
+        "name": "id"
+      },
+      {
         "id": 0,
         "label": "Código",
         "type": "input",
