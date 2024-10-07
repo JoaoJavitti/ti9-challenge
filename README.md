@@ -50,8 +50,8 @@ npm i --save
 ng serve main
 ```
 
-#Considerações Finais
+## Considerações Finais
 Este projeto foi uma excelente oportunidade para aplicar as novas funcionalidades do Angular 18 e demonstrar habilidades em componentização e criação de interfaces dinâmicas. Além disso, foi utilizado um framework desenvolvido por mim para facilitar a reutilização de componentes.
 
-#Contribuições
+## Contribuições
 Agradeço pela oportunidade de participar deste desafio e estou aberto a sugestões e feedbacks.
