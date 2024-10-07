@@ -1,27 +1,57 @@
-# Ti9Challenge
+# Desafio Frontend Angular - Ti9 Sistemas
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
+## Introdução
+Este projeto foi desenvolvido como resposta ao desafio para a vaga de desenvolvedor frontend Angular na Ti9 Sistemas. A aplicação é um sistema de gerenciamento de fornecedores, permitindo a realização de operações de CRUD (Criar, Ler, Atualizar, Excluir) de maneira dinâmica, utilizando Angular 18 e Angular Material.
 
-## Development server
+## Tecnologias Utilizadas
+- **Angular 18**
+- **Angular Material 18**
+- **TypeScript**
+- **HTML/CSS**
+- **JSON para configuração dinâmica**
+- **Framework de design PGC-Framework (desenvolvido por mim)**
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Funcionalidades
 
-## Code scaffolding
+### Montagem Dinâmica de Telas
+- A aplicação utiliza um arquivo externo `.json` para definir e renderizar dinamicamente os campos dos formulários e as colunas da tabela de listagem de fornecedores.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Listagem de Fornecedores
+- Exibição de uma lista de fornecedores em um datatable do Angular Material com as seguintes colunas:
+  - **Código:** Alfanumérico.
+  - **Nome:** Nome do fornecedor ou nome fantasia (para pessoa jurídica).
+  - **CPF/CNPJ:** Exibe o CPF se for pessoa física ou o CNPJ se for pessoa jurídica.
+  - **Botões de Ação:** Inclui os botões de ações Novo, Editar e Excluir.
 
-## Build
+### Formulário de Cadastro/Atualização de Fornecedores
+- Formulário dinâmico para criar ou editar fornecedores, com os seguintes campos:
+  - **Código:** Input (text), Requerido, tamanho máximo de 6 caracteres.
+  - **Nome:** Input (text), Requerido.
+  - **Natureza:** Select (Pessoa Física ou Jurídica), Requerido.
+  - **Endereço:** Input (text), Requerido.
+  - **Estado (UF):** Select (Selecionar o Estado), Requerido.
+  - **Ativo:** Boolean (slide-toggle), indica se o fornecedor está ativo.
+  - **Aceita Pix:** Boolean (checkbox), indica se o fornecedor aceita pagamentos via Pix.
+  - **Tipo de Chave Pix:** Select (CNPJ/CPF, E-mail, Celular, Chave Aleatória), exibido se "Aceita Pix" for verdadeiro.
+  - **Chave Pix:** Input (text), exibido se "Aceita Pix" for verdadeiro.
+  - **Observações:** Textarea, campo opcional para adicionar observações adicionais.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Ações no Formulário
+- Após as operações de Incluir, Alterar ou Excluir um fornecedor, a listagem é automaticamente atualizada.
+- Mensagens de sucesso ou erro são exibidas conforme o resultado das operações.
 
-## Running unit tests
+### Persistência dos Dados
+- Os dados são armazenados em memória durante a execução da aplicação sendo possível utilizar `localStorage` para preservá-los após o fechamento do navegador.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Como Rodar o Projeto
+Para executar a aplicação, utilize o seguinte comando:
+```bash
+npm i --save
+ng serve main
+```
 
-## Running end-to-end tests
+#Considerações Finais
+Este projeto foi uma excelente oportunidade para aplicar as novas funcionalidades do Angular 18 e demonstrar habilidades em componentização e criação de interfaces dinâmicas. Além disso, foi utilizado um framework desenvolvido por mim para facilitar a reutilização de componentes.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+#Contribuições
+Agradeço pela oportunidade de participar deste desafio e estou aberto a sugestões e feedbacks.
