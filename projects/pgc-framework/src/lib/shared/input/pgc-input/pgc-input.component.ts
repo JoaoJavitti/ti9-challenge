@@ -77,4 +77,8 @@ export class PgcInputComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
+  getControl(){
+    return this.control;
+  }
+
 }

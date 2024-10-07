@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validator, ValidatorFn, Validators } from '@angular/forms';
 import { errorMessages } from '../../info/error-messages';
 import { PgcInputComponent } from '../pgc-input/pgc-input.component';
@@ -28,11 +28,6 @@ export class PgcCpfCnpjInputComponent extends PgcInputComponent {
     super.addValidators(Validators.maxLength(18));
     super.addValidators(cpfCnpjValidator);
   }
-
-  override checkError(): void {
-    super.checkError();
-  }
-
 
   onInputChange(): void {
     if (this.control.value != null) {

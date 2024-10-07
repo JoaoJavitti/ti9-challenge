@@ -13,12 +13,12 @@
                 {{getColumn(row, column)}}
             </mat-cell>
             } @else {
-            <mat-cell *matCellDef="let row">
+            <mat-cell *matCellDef="let row; let i = index">
                 <div class="button-container">
                     <button mat-raised-button class="custom-button" (click)="onEdit(row)">
                         <mat-icon>edit</mat-icon>
                     </button>
-                    <button mat-raised-button class="custom-button" (click)="onDelete(row)">
+                    <button mat-raised-button class="custom-button" (click)="onDelete(i)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </div>

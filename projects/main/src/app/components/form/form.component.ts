@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, OnChanges, OnInit, signal, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { cpfCnpjValidator, PgcFrameworkModule } from 'pgc-framework';
@@ -17,7 +17,7 @@ import { DependentValidator } from '../../validators/dependent.validation';
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'
 })
-export class FormComponent<T> implements OnInit {
+export class FormComponent implements OnInit {
   formConfig: any;
   elementForm: FormGroup = new FormGroup({});
   formData!: Supplier;
@@ -44,19 +44,35 @@ export class FormComponent<T> implements OnInit {
     });
   }
 
-  // Função para construir o formulário dinamicamente
+
   buildForm(fields: any[]): FormGroup {
     const group: any = {};
 
     fields.forEach(field => {
       const validators = this.getValidators(field);
       group[field.name] = this.fb.control('', validators);
-      //console.log(group);
+      this.setUpdate(field, group);
     });
     return this.fb.group(group);
   }
 
-  // Função para obter as validações do campo
+  setUpdate(field: any, group: any) {
+    field?.condition?.forEach((condition: any) => {
+
+      const conditionField = group[condition.field];
+      if (conditionField) {
+        conditionField.valueChanges.subscribe((value: any) => {
+          this.updateVisibility(field);
+        });
+      }
+    });
+  }
+
+  updateVisibility(field: any) {
+    if (this.showField(field))
+      this.elementForm.get(field.name)?.setValidators(this.getValidators(field));
+  }
+
   getValidators(field: any): any[] {
     const validators = [];
     if (field.validation?.required) {
@@ -74,7 +90,6 @@ export class FormComponent<T> implements OnInit {
     return validators;
   }
 
-  //Retorna os controles do Formulário para serem utilizados no HTML
   getControl(controlName: string): FormControl {
     let control = this.elementForm.get(controlName) as FormControl;
     if (control != null) {
@@ -82,7 +97,6 @@ export class FormComponent<T> implements OnInit {
     } else return new FormControl("");
   }
 
-  // Verifica se o campo deve ser exibido, considerando condições
   showField(field: any): boolean {
     let show = true;
     field?.condition?.forEach((condition: any) => {

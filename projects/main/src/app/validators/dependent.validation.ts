@@ -8,28 +8,26 @@ export class DependentValidator {
           const parent = control.parent;
       
           if (!parent) {
-            return null; // Se o controle não estiver dentro de um FormGroup
+            return null; 
           }
       
           const otherControl = parent.get(otherControlName);
       
           if (!otherControl) {
-            return null; // Se o controle dependente não existir
+            return null; 
           }
       
-          // Observa as mudanças no controle dependente
           otherControl.valueChanges.subscribe(() => {
             if(!otherControl.value)
                 control.setValue("");
-            control.updateValueAndValidity(); // Atualiza a validade do controle atual
+            control.updateValueAndValidity(); 
           });
           
-          // Validação condicional
           if (otherControl.value == valueComparator && !control.value) {
-            return { required: true }; // Retorna erro se o controle estiver vazio
+            return { required: true }; 
           }
       
-          return null; // Sem erro de validação
+          return null; 
         };
       }
 }
