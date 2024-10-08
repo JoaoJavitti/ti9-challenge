@@ -30,19 +30,19 @@ export const errorMessages: { [key: string]: { [key: string]: string } } = {
 export function getErrorMessagesForFormGroup(formGroup: FormGroup): string {
     let messages: string[] = [];
   
-    Object.keys(formGroup.controls).forEach(controlName => {
+    Object.keys(formGroup.controls).forEach(controlName => { // Para cada controle do formulário
       const control = formGroup.get(controlName) as FormControl;
   
       if (control && control.errors) {
-        const controlErrors = control.errors;
+        const controlErrors = control.errors; // Se o controle possui erros
   
-        Object.keys(controlErrors).forEach(errorKey => {
+        Object.keys(controlErrors).forEach(errorKey => {  //  Para cada erro no controle
           const errorValue = controlErrors[errorKey];
-          let message = errorMessages[errorKey]?.['default'];
+          let message = errorMessages[errorKey]?.['default']; //  Troca a mensagem pela do dictonary acima
   
-          if (message && typeof message === 'string' && errorValue) {
+          if (message && typeof message === 'string' && errorValue) { //  Se possui uma mensagem de erro
             Object.keys(errorValue).forEach(key => {
-              message = message.replace(`{{${key}}}`, errorValue[key]);
+              message = message.replace(`{{${key}}}`, errorValue[key]); //  Substitui os erros padrão pelos do dictionary
             });
           }
   

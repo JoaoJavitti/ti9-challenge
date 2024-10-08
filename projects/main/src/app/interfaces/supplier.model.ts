@@ -1,4 +1,3 @@
-import { Interface } from "readline";
 
 export interface Supplier{
     [key:string]:any;

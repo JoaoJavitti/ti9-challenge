@@ -1,6 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, effect, inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ShareDataService } from '../../scripts/share-formdata.service';
+import { ShareDataService } from '../../services/share-formdata.service';
 import { Supplier } from '../../interfaces/supplier.model';
 import { CommonModule } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -33,17 +33,16 @@ export class TableComponent implements OnInit {
 
   constructor(private http: HttpClient) {
     effect(() => {
-      this.formData = this.shareFormDataService.getFormData();
-
+      this.formData = this.shareFormDataService.getFormData(); // Atualiza o os dados do Form quando o Form é atualizado
     });
     effect(() => {
-      this.suppliers = this.shareFormDataService.getSuppliers();
-      this.dataSource = new MatTableDataSource<Supplier>(this.suppliers);
-      this.dataSource.paginator = this.paginator;
+      this.suppliers = this.shareFormDataService.getSuppliers(); //  Atualiza a lista de fornecedores
+      this.dataSource = new MatTableDataSource<Supplier>(this.suppliers); //  Atualiza os dados da tabela com base na nova lista
+      this.dataSource.paginator = this.paginator;// Atualiza o paginator
     });
 
-    this.filtro.valueChanges.subscribe((value:string) => {
-      this.dataSource.filter = value;
+    this.filtro.valueChanges.subscribe((value: string) => {
+      this.dataSource.filter = value; //  Atualiza o filtro
     })
   }
 
@@ -53,26 +52,17 @@ export class TableComponent implements OnInit {
     });
   }
 
-  onEdit(edit:Supplier) {
+  onEdit(edit: Supplier) {
     this.formData = edit;
-    this.shareFormDataService.setFormData(edit);
+    this.shareFormDataService.setFormData(this.formData); //  Atualiza o form com os dados do fornecedor para ser editado
   }
 
   onDelete(index: number) {
-    this.shareFormDataService.removeSupplier(index);
+    this.shareFormDataService.removeSupplier(index); // Remove o fornecedor da lista
   }
 
-  getColumn(supplier: Supplier, column: string) {
+  getColumn(supplier: Supplier, column: string) { //Converte o nome da columa em um indexador do modelo
     const col = column.charAt(0).toLowerCase() + column.slice(1).replace(" ", "").replace("/", "");
     return supplier[col];
-  }
-
-  autocompleteOptions(): {label:string, value:string}[]{
-    return this.suppliers.map(s => {
-      return {
-        label:s.nome,
-        value: s.nome + s.cnpjCpf + s.codigo
-      }
-    })
   }
 }

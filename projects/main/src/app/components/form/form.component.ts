@@ -1,11 +1,9 @@
-import { Component, effect, inject, OnChanges, OnInit, signal, SimpleChanges } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { cpfCnpjValidator, PgcFrameworkModule } from 'pgc-framework';
-import { ShareDataService } from '../../scripts/share-formdata.service';
+import { PgcFrameworkModule } from 'pgc-framework';
+import { ShareDataService } from '../../services/share-formdata.service';
 import { Supplier } from '../../interfaces/supplier.model';
-import * as $ from 'jquery';
-import { Console } from 'console';
 import { getErrorMessagesForFormGroup } from '../../scripts/error-message';
 import { CpfCnpjValidator } from '../../validators/cnpjcpf.validation';
 import { DependentValidator } from '../../validators/dependent.validation';
@@ -28,10 +26,10 @@ export class FormComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private http: HttpClient) {
     effect(() => {
-      this.formData = this.shareFormDataService.getFormData();
-      this.suppliers = this.shareFormDataService.getSuppliers();
+      this.formData = this.shareFormDataService.getFormData(); //Atualiza os valores do formulário com base no Signal
+      this.suppliers = this.shareFormDataService.getSuppliers(); //Recebe a lista de Fornecedores
       if (Object.keys(this.elementForm.controls).length > 0) {
-        this.elementForm.setValue(this.shareFormDataService.getFormData(), { emitEvent: false });
+        this.elementForm.setValue(this.formData, { emitEvent: false }); // Se o formulário já foi criado, inserir os valores recebidos
       }
     })
   }
@@ -49,32 +47,31 @@ export class FormComponent implements OnInit {
     const group: any = {};
 
     fields.forEach(field => {
-      const validators = this.getValidators(field);
-      group[field.name] = this.fb.control('', validators);
-      this.setUpdate(field, group);
+      const validators = this.getValidators(field); //  Retorna os validators com base no JSON
+      group[field.name] = this.fb.control('', validators); // Cria o controle do formulário
+      this.setUpdate(field, group); //  Define se o controle atualiza os demais controles
     });
-    return this.fb.group(group);
+    return this.fb.group(group); // Forma umm FormGroup com base nos controles criados
   }
 
   setUpdate(field: any, group: any) {
-    field?.condition?.forEach((condition: any) => {
-
+    field?.condition?.forEach((condition: any) => { //  Para cada campo no JSON
       const conditionField = group[condition.field];
       if (conditionField) {
-        conditionField.valueChanges.subscribe((value: any) => {
-          this.updateVisibility(field);
-        });
+        conditionField.valueChanges.subscribe((value: any) => { //  Se o campo é dependente de outro campo
+          this.updateVisibility(field);                         //  o atualiza quando o campo do qual depende é
+        });                                                     //  é alterado
       }
     });
   }
 
   updateVisibility(field: any) {
-    if (this.showField(field))
-      this.elementForm.get(field.name)?.setValidators(this.getValidators(field));
+    if (this.showField(field))    //  Se o campo está visível
+      this.elementForm.get(field.name)?.setValidators(this.getValidators(field)); //Atualiza os validators
   }
 
   getValidators(field: any): any[] {
-    const validators = [];
+    const validators = []; // Atualiza os validators a partir do arquivo JSON
     if (field.validation?.required) {
       validators.push(Validators.required);
     }
@@ -90,7 +87,7 @@ export class FormComponent implements OnInit {
     return validators;
   }
 
-  getControl(controlName: string): FormControl {
+  getControl(controlName: string): FormControl { // Retorna o controle criado com base no nome, ou um controle vazio
     let control = this.elementForm.get(controlName) as FormControl;
     if (control != null) {
       return control;
@@ -100,36 +97,36 @@ export class FormComponent implements OnInit {
   showField(field: any): boolean {
     let show = true;
     field?.condition?.forEach((condition: any) => {
-      const conditionField = this.elementForm.get(condition.field);
-      show = show && conditionField?.value === condition.value;
+      const conditionField = this.elementForm.get(condition.field); //  Se a condição do campo (com base no json) for verdadeira
+      show = show && conditionField?.value === condition.value;     //  o campo será renderizado na tela
     });
 
     return show;
   }
 
   onSubmit = (): void => {
-    if (this.elementForm.valid) {
-      this.formSuccess = true;
-      this.shareFormDataService.createUpdate(this.elementForm.value as Supplier);
-      this.shareFormDataService.clearFormData();
+    if (this.elementForm.valid) { //  Se o formulário é verdadeiro
+      this.formSuccess = true;    //  Abre o dialog de sucesso
+      this.shareFormDataService.createUpdate(this.elementForm.value as Supplier); //  Cria o novo fornecedor ou atualiza
+      this.shareFormDataService.clearFormData(); // Limpa o formulário
     }
     else
-      this.formError = true;
+      this.formError = true; // Abre o alert de erro
   }
 
   onAlertClose = (): void => {
-    this.formError = false;
+    this.formError = false; //  Fecha o alert
   }
 
   message(): string {
-    return getErrorMessagesForFormGroup(this.elementForm);
+    return getErrorMessagesForFormGroup(this.elementForm); // Retorna os erros do formulário e os imprime no alert
   }
 
   onReset = (): void => {
-    this.shareFormDataService.clearFormData();
+    this.shareFormDataService.clearFormData(); // Limpa o form
   }
 
   onDialogClose = (): void => {
-    this.formSuccess = false;
+    this.formSuccess = false; //  Fecha o dialog
   }
 }
