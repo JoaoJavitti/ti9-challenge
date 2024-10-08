@@ -7,6 +7,7 @@ import { Supplier } from '../../interfaces/supplier.model';
 import { getErrorMessagesForFormGroup } from '../../scripts/error-message';
 import { CpfCnpjValidator } from '../../validators/cnpjcpf.validation';
 import { DependentValidator } from '../../validators/dependent.validation';
+import { EmailValidator } from '../../validators/email.validation';
 
 @Component({
   selector: 'app-main-form',
@@ -83,6 +84,9 @@ export class FormComponent implements OnInit {
     }
     if (field.validation?.dependent) {
       validators.push(DependentValidator.dependentValidator(field.validation?.dependent.control, field.validation?.dependent.value))
+    }
+    if (field.validation?.email) {
+      validators.push(EmailValidator.emailValidator)
     }
     return validators;
   }

@@ -164,6 +164,7 @@
         "component": "pgc-input",
         "name": "chavePix",
         "validation": {
+          "email": true,
           "dependent": {"control": "aceitaPix", "value":true}
         },
         "condition": [

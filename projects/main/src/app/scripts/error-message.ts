@@ -5,7 +5,7 @@ export const errorMessages: { [key: string]: { [key: string]: string } } = {
     default: 'Este campo é obrigatório.',
   },
   email: {
-    default: 'Por favor, insira um endereço de e-mail válido.',
+    default: 'Insira um endereço de e-mail válido.',
   },
   minlength: {
     default: 'A entrada é muito curta. Mínimo: {{requiredLength}} caracteres.',
